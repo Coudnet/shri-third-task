@@ -1,23 +1,21 @@
 let data = require('./input.json');
 import { Shedule } from './shedule';
 
-start_btn.addEventListener('click', startCalculate);
+start_btn.addEventListener('click', startByClick);
 
-function startCalculate() {
+function startByClick() {
+    console.log(calculate(data));
+}
+
+function calculate(data) {
     try {
         let rates = data.rates;
         let devices = data.devices;
         let maxPower = data.maxPower;
-        let time = performance.now();
-
         let shedule = new Shedule(rates, devices, maxPower);
-
-        time = performance.now() - time;
-
-        console.log(shedule.makeExport());
-        console.log(`Время выполнения = ${time}ms`);
+        return shedule.makeExport();
     } catch (e) {
-        console.log(e.message)
+        return e.message;
     }
 }
 
